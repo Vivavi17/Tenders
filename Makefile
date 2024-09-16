@@ -1,15 +1,15 @@
 app_port = 8080
 
 run:
-	docker run -p ${app_port}:${app_port} --env-file ./.env 'tender_app'
+	docker run -p ${app_port}:${app_port} --env-file src/.env 'tender_app'
 
 build: env_file
 	docker build --tag 'tender_app' .
 
 env_file:
-ifeq (,$(wildcard .env))
+ifeq (,$(wildcard src/.env))
 	@echo "Creating .env file from .env-example..."
-	cp .env-example .env
+	cp src/.env-example src/.env
 endif
 
 clean:
